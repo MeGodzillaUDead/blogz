@@ -7,3 +7,4 @@ app.config['SQLALCHEMY_DATABASE_ID'] = 'mysql+pymysql://build-a-blog:catfish@loc
 app.config['SQLALCHEMY_ECHO'] = True
 app.secret_key = "catfish"
 
+db = SQLAlchemy(app)
