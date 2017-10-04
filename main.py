@@ -28,6 +28,13 @@ def blog():
 @app.route("/newpost", methods=['POST', 'GET'])
 def newpost():
 	if request.method == 'POST':
+		if not request.form['title'] or not request.form['body']:
+			if not request.form['title']:
+				flash("Title cannot be blank.")
+			if not request.form['body']:
+				flash("Body cannot be empty.")
+			return render_template("newpost.html")
+		
 		blog_title = request.form['title']
 		blog_body = request.form['body']
 		post = Blog(blog_title, blog_body)

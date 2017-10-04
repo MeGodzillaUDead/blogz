@@ -3,6 +3,11 @@
 	<title>{{title}}</title>
 </head>
 	<body>
+		{% with messages = get_flashed_messages() %}
+			{% for message in messages %}
+			<p>{{message}}</p>
+			{% endfor %}
+		{% endwith %}
 		<a href="/blog">Main Page</a>  <a href="/newpost">New Post</a>
 		<hr />
 		{% block content %}
