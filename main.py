@@ -25,5 +25,9 @@ def blog():
 	
 	return render_template("blog.html", entries=entries)
 	
+@app.route("/newpost")
+def newpost():
+	return render_template("newpost.html")
+		
 if __name__ == "__main__":
 	app.run()
