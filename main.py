@@ -19,3 +19,11 @@ class Blog(db.Model):
 		self.title = title
 		self.body = body
 		
+@app.route("/blog")
+def blog():
+	entries = Blog.query.all()
+	
+	return render_template("blog.html", entries=entries)
+	
+if __name__ == "__main__":
+	app.run()
