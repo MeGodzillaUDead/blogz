@@ -8,3 +8,9 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.secret_key = "catfish"
 
 db = SQLAlchemy(app)
+
+# database model classes to create tables from
+class Blog(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	title = db.Column(db.String(50))
+	body = db.Column(db.String(255))
