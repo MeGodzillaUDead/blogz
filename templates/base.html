@@ -1,6 +1,7 @@
 <html>
 <head>
 	<title>{{title}}</title>
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" >
 </head>
 	<body>
 		{% with messages = get_flashed_messages() %}
