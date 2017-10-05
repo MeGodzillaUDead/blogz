@@ -1,3 +1,24 @@
 body {
 	background-color: #f0f7f4;
+	font-color: #3c493f;
 	}
+	
+/* unvisited link */
+a:link {
+    color: #7e8d85;
+}
+
+/* visited link */
+a:visited {
+    color: #7e8d85;
+}
+
+/* mouse over link */
+a:hover {
+    color: #b3bfb8;
+}
+
+/* selected link */
+a:active {
+    color: #b3bfb8;
+}
