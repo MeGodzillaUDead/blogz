@@ -21,9 +21,18 @@ class Blog(db.Model):
 		
 @app.route("/blog")
 def blog():
-	entries = Blog.query.all()
+	# if there is an id argument render just that blog
+	if request.args.get('id'):
+		blog_id = request.args.get('id')
+		blog = Blog.query.filter_by(id=blog_id).first()
+		
+		return render_template("one-blog.html", blog = blog)
 	
-	return render_template("blog.html", entries=entries)
+	else:
+		# for get requests without args render the landing page
+		entries = Blog.query.all()
+		
+		return render_template("blog.html", entries=entries)
 	
 @app.route("/newpost", methods=['POST', 'GET'])
 def newpost():
