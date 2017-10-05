@@ -50,7 +50,9 @@ def newpost():
 		db.session.add(post)
 		db.session.commit()
 		
-		return redirect("/blog")
+		id = str(post.id)
+		
+		return redirect("/blog?id=" + id)
 	
 	return render_template("newpost.html")
 		
