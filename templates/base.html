@@ -4,14 +4,21 @@
 	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" >
 </head>
 	<body>
-		{% with messages = get_flashed_messages() %}
-			{% for message in messages %}
-			<p>{{message}}</p>
-			{% endfor %}
-		{% endwith %}
-		<a href="/blog">Main Page</a>  <a href="/newpost">New Post</a>
-		<hr />
-		{% block content %}
-		{% endblock %}
+		<div id="left">
+			<a href="/blog">Main Page</a>  <a href="/newpost">New Post</a>
+			<hr />
+		</div>
+
+		<div id="right">
+			{% with messages = get_flashed_messages() %}
+				{% for message in messages %}
+				<p>{{message}}</p>
+				{% endfor %}
+			{% endwith %}
+			
+			{% block content %}
+			{% endblock %}
+		</div>
+
 	</body>
 </html>
