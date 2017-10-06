@@ -1,16 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
 	<form method="post">
-	<label>Title for new post:
-		<input type="text" name="title" value="{{request.form['title']}}"/>
-	</label>
-	<br>
-	<label>
-		Content for new post:
-		<br />
-		<textarea rows="5" cols="50" name="body">{{request.form['body']}}</textarea>
-	</label>
-	<br>
-	<input type="submit" value="Add Post" />
+		<table>
+			<tr>
+				<td>
+				<label for="title">Title for new post: </label>
+				</td>
+				<td>
+					<textarea name="title" rows="1" cols="50">{{request.form['title']}}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">
+				<label for="body">Content for new post: </label>
+				</td>
+				<td>
+					<textarea rows="5" cols="50" name="body">{{request.form['body']}}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+				<input style="float: right;" type="submit" value="Add Post" />
+				</td>
+			</tr>
+		</table>
 	</form>
 {% endblock %}
