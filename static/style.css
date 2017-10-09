@@ -18,6 +18,10 @@ body {
 	padding-right: 20px;
 	}
 
+.message {
+	color: 5d1c3b;
+	}
+
 a:link, a:visited {
     color: #7e8d85;
 }

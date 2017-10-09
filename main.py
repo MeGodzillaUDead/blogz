@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 class Blog(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	title = db.Column(db.String(50))
-	body = db.Column(db.String(255))
+	body = db.Column(db.Text)
 	
 	def __init__(self, title, body):
 		self.title = title
@@ -52,6 +52,8 @@ def newpost():
 		post = Blog(blog_title, blog_body)
 		db.session.add(post)
 		db.session.commit()
+		
+		flash("New post created.")
 		
 		id = str(post.id)
 		
