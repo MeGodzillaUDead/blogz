@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, render_template, session, flash
 from flask_sqlalchemy import SQLAlchemy
+from sort import reverse_bubble_sort
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -31,6 +32,8 @@ def blog():
 	else:
 		# for get requests without args render the landing page
 		entries = Blog.query.all()
+		# need to reverse sort
+		reverse_bubble_sort(entries)
 		
 		return render_template("blog.html", entries=entries)
 	
