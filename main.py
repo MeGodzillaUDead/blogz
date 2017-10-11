@@ -94,8 +94,7 @@ def signup():
 			errors += 1
 			
 		if errors > 0:
-			return render_template("signup.html")
-		
+			return render_template("signup.html")		
 		else:					
 			username = request.form['username']
 			password = request.form['password']
@@ -113,6 +112,21 @@ def signup():
 ## login GET and POST routes
 @app.route("/login", methods=['GET','POST'])
 def login():
+	if request.method == 'POST':
+		errors = 0 # set error count to zero for each new POST request
+		if not request.form['username']:
+			flash("Username cannot be blank.")
+			errors += 1
+		if not request.form['password']:
+			flash("Password cannot be blank.")
+			errors += 1
+
+		if errors > 0:
+			return render_template("signup.html")		
+		else:
+			username = request.form['username']
+			password = request.form['password']		
+	
 	return render_template("login.html")
 
 if __name__ == "__main__":
