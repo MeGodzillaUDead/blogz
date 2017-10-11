@@ -92,7 +92,7 @@ def signup():
 		if request.form['password'] != request.form['verify']:
 			flash("Passwords do not match.")
 			errors += 1
-		if request.form['username'] and Users.query.filter_by(username=request.form['username']).first():
+		if request.form['username'] and User.query.filter_by(username=request.form['username']).first():
 			flash("Username already exists.")
 			errors += 1
 			
@@ -123,12 +123,20 @@ def login():
 		if not request.form['password']:
 			flash("Password cannot be blank.")
 			errors += 1
+		if request.form['username'] and not User.query.filter_by(username=request.form['username']).first():
+			flash("Username does not exist.")
+			errors += 1
 
 		if errors > 0:
-			return render_template("signup.html")		
+			return render_template("login.html")		
 		else:
 			username = request.form['username']
 			password = request.form['password']
+			
+			user = User.query.filter_by(username=username).first()
+			if password != user.password:
+				flash("Wrong password.")
+				return render_template("login.html")
 			
 			flash("Logged in as " + username)
 			return redirect("/blog")	
