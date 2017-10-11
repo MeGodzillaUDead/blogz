@@ -62,6 +62,7 @@ def newpost():
 		
 		blog_title = request.form['title']
 		blog_body = request.form['body']
+		
 		post = Blog(blog_title, blog_body)
 		db.session.add(post)
 		db.session.commit()
@@ -77,6 +78,17 @@ def newpost():
 ## signup GET and POST routes
 @app.route("/signup", methods=['GET','POST'])
 def signup():
+	if request.method == 'POST':
+		username = request.form['username']
+		password = request.form['password']
+		
+		user = User(username, password)
+		db.session.add(user)
+		db.session.commit()
+		
+		flash("Logged in as " + username)
+		return redirect("/blog")		
+	
 	return render_template("signup.html")
 		
 ## login GET and POST routes
