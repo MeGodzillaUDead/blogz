@@ -73,6 +73,14 @@ def newpost():
 		return redirect("/blog?id=" + id)
 	
 	return render_template("newpost.html")
+	
+## signup GET and POST routes
+@app.route("/signup", methods=['GET', 'POST'])
+def signup():
+	return render_template("signup.html")
 		
+## login GET and POST routes
+
+
 if __name__ == "__main__":
 	app.run()
