@@ -107,8 +107,9 @@ def signup():
 			db.session.add(user)
 			db.session.commit()
 			
+			session['user'] = username
 			flash("Logged in as " + username)
-			return redirect("/blog")		
+			return redirect("/newpost")		
 	
 	return render_template("signup.html")
 		
@@ -138,8 +139,9 @@ def login():
 				flash("Wrong password.")
 				return render_template("login.html")
 			
+			session['user'] = username
 			flash("Logged in as " + username)
-			return redirect("/blog")	
+			return redirect("/newpost")	
 	
 	return render_template("login.html")
 
