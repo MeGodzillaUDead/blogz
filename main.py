@@ -32,6 +32,13 @@ class User(db.Model):
 		self.username = username
 		self.password = password
 
+# require login for some pages
+@app.before_request
+def require_login():
+	whitelist = ['login','blog','signup','index']
+	if request.endpoint not in whitelist and 'user' not in session:
+		return redirect("/login")
+
 # Flask handler routes
 @app.route("/blog")
 def blog():
