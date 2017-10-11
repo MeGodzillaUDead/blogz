@@ -79,15 +79,34 @@ def newpost():
 @app.route("/signup", methods=['GET','POST'])
 def signup():
 	if request.method == 'POST':
-		username = request.form['username']
-		password = request.form['password']
+		errors = 0 # set error count to zero for each new POST request
+		if not request.form['username']:
+			flash("Username cannot be blank.")
+			errors += 1
+		if not request.form['password']:
+			flash("Password cannot be blank.")
+			errors += 1
+		if not request.form['verify']:
+			flash("Password verification cannot be blank.")
+			errors += 1
+		if request.form['password'] != request.form['verify']:
+			flash("Passwords do not match.")
+			errors += 1
+			
+		if errors > 0:
+			return render_template("signup.html")
 		
-		user = User(username, password)
-		db.session.add(user)
-		db.session.commit()
-		
-		flash("Logged in as " + username)
-		return redirect("/blog")		
+		else:					
+			username = request.form['username']
+			password = request.form['password']
+			verify = request.form['verify']
+			
+			user = User(username, password)
+			db.session.add(user)
+			db.session.commit()
+			
+			flash("Logged in as " + username)
+			return redirect("/blog")		
 	
 	return render_template("signup.html")
 		
