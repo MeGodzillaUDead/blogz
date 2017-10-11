@@ -145,5 +145,14 @@ def login():
 	
 	return render_template("login.html")
 
+@app.route("/logout")
+def logout():
+	del session['user']
+	return redirect("/blog")
+	
+@app.route("/")
+def index():
+	return "<h1>Index Page is under construction</h1>"
+
 if __name__ == "__main__":
 	app.run()
