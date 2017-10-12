@@ -69,8 +69,9 @@ def newpost():
 		
 		blog_title = request.form['title']
 		blog_body = request.form['body']
+		user = User.query.filter_by(username=session['user']).first()
 		
-		post = Blog(blog_title, blog_body)
+		post = Blog(blog_title, blog_body, user)
 		db.session.add(post)
 		db.session.commit()
 		
