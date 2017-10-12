@@ -1,6 +1,6 @@
 body {
 	background-color: #f0f7f4;
-	font-color: #3c493f;
+	color: #3c493f;
 	}
 	
 .left {
@@ -21,6 +21,11 @@ body {
 .message {
 	color: 5d1c3b;
 	}
+	
+.author {
+	text-align: right;
+	font-size: 0.75rem;
+}
 
 a:link, a:visited {
     color: #7e8d85;
