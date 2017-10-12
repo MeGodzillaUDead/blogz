@@ -48,6 +48,13 @@ def blog():
 		blog = Blog.query.filter_by(id=blog_id).first()
 		
 		return render_template("one-blog.html", blog = blog)
+		
+	elif request.args.get('user'):
+		user_id = request.args.get('user')
+		entries = Blog.query.filter_by(user_id=user_id).all()
+		
+		reverse_bubble_sort(entries)
+		return render_template("blog.html", entries=entries)
 	
 	else:
 		# for get requests without args render the landing page
@@ -160,7 +167,8 @@ def logout():
 	
 @app.route("/")
 def index():
-	return "<h1>Index Page is under construction</h1>"
+	users = User.query.all()
+	return render_template("user_index.html", users=users)
 
 if __name__ == "__main__":
 	app.run()
