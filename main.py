@@ -47,14 +47,14 @@ def blog():
 		blog_id = request.args.get('id')
 		blog = Blog.query.filter_by(id=blog_id).first()
 		
-		return render_template("one-blog.html", blog = blog)
+		return render_template("one-blog.html", blog = blog, title="Post #" + blog_id)
 		
 	elif request.args.get('user'):
 		user_id = request.args.get('user')
 		entries = Blog.query.filter_by(user_id=user_id).all()
 		
 		reverse_bubble_sort(entries)
-		return render_template("blog.html", entries=entries)
+		return render_template("blog.html", entries=entries, title="Posts by " + entries[0].user.username)
 	
 	else:
 		# for get requests without args render the landing page
@@ -62,7 +62,7 @@ def blog():
 		# need to reverse sort
 		reverse_bubble_sort(entries)
 		
-		return render_template("blog.html", entries=entries)
+		return render_template("blog.html", entries=entries, title="All Posts")
 	
 @app.route("/newpost", methods=['POST', 'GET'])
 def newpost():
@@ -72,7 +72,7 @@ def newpost():
 				flash("Title cannot be blank.")
 			if not request.form['body']:
 				flash("Body cannot be empty.")
-			return render_template("newpost.html")
+			return render_template("newpost.html", title="New Post")
 		
 		blog_title = request.form['title']
 		blog_body = request.form['body']
@@ -88,7 +88,7 @@ def newpost():
 		
 		return redirect("/blog?id=" + id)
 	
-	return render_template("newpost.html")
+	return render_template("newpost.html", title="New Post")
 	
 ## signup GET and POST routes
 @app.route("/signup", methods=['GET','POST'])
@@ -112,7 +112,7 @@ def signup():
 			errors += 1
 			
 		if errors > 0:
-			return render_template("signup.html")		
+			return render_template("signup.html", title="Sign Up")		
 		else:					
 			username = request.form['username']
 			password = request.form['password']
@@ -126,7 +126,7 @@ def signup():
 			flash("Logged in as " + username)
 			return redirect("/newpost")		
 	
-	return render_template("signup.html")
+	return render_template("signup.html", title="Sign Up")
 		
 ## login GET and POST routes
 @app.route("/login", methods=['GET','POST'])
@@ -144,7 +144,7 @@ def login():
 			errors += 1
 
 		if errors > 0:
-			return render_template("login.html")		
+			return render_template("login.html", title="Log In")		
 		else:
 			username = request.form['username']
 			password = request.form['password']
@@ -152,13 +152,13 @@ def login():
 			user = User.query.filter_by(username=username).first()
 			if password != user.password:
 				flash("Wrong password.")
-				return render_template("login.html")
+				return render_template("login.html", title="Log In")
 			
 			session['user'] = username
 			flash("Logged in as " + username)
 			return redirect("/newpost")	
 	
-	return render_template("login.html")
+	return render_template("login.html", title="Log In")
 
 @app.route("/logout")
 def logout():
@@ -168,7 +168,7 @@ def logout():
 @app.route("/")
 def index():
 	users = User.query.all()
-	return render_template("user_index.html", users=users)
+	return render_template("user_index.html", users=users, title="Authors")
 
 if __name__ == "__main__":
 	app.run()
