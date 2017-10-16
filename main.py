@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, session, flash
+from flask import Flask, request, redirect, render_template, session, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sort import reverse_bubble_sort
 
@@ -35,7 +35,7 @@ class User(db.Model):
 # require login for some pages
 @app.before_request
 def require_login():
-	whitelist = ['login','blog','signup','index']
+	whitelist = ['login','blog','signup','index', 'static']
 	if request.endpoint not in whitelist and 'user' not in session:
 		return redirect("/login")
 
