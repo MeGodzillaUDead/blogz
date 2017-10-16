@@ -60,3 +60,8 @@ a.nav:hover, a.nav:active {
 	color: #3c493f;
 	text-decoration: none;
 	}
+
+#logout {
+	position: absolute;
+	bottom: 0;
+	}
