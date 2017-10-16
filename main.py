@@ -162,6 +162,7 @@ def login():
 
 @app.route("/logout")
 def logout():
+	flash("Logged out " + session['user'])
 	del session['user']
 	return redirect("/blog")
 	
